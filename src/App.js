@@ -1,9 +1,21 @@
 import logo from './logo.svg';
+import FirstComponet, {SecondComponet} from './components/learning-examples/FirstComponent'
+import ThirdComponet from './components/learning-examples/ThirdComponent'
+import Counter from './components/counter/Counter'
 import './App.css';
+import { Component } from 'react';
+
+
 
 function App() {
   return (
     <div className="App">
+      <Counter></Counter>
+
+      {/* <FirstComponet></FirstComponet>
+      <SecondComponet></SecondComponet>
+      <ThirdComponet></ThirdComponet> */}
+
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,9 +31,12 @@ function App() {
         </a>
       </header> */}
 
-      Hello World from React!
+      
     </div>
   );
 }
+
+
+
 
 export default App;
