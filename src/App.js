@@ -1,10 +1,10 @@
 import logo from './logo.svg';
-import FirstComponet, {SecondComponet} from './components/learning-examples/FirstComponent'
-import ThirdComponet from './components/learning-examples/ThirdComponent'
-import Counter from './components/counter/Counter'
+// import FirstComponet, {SecondComponet} from './components/learning-examples/FirstComponent'
+// import ThirdComponet from './components/learning-examples/ThirdComponent'
+// import Counter from './components/counter/Counter'
 import TodoApp from './components/todo/TodoApp'
 import './App.css';
-import { Component } from 'react';
+import './bootstrap.css';
 
 
 

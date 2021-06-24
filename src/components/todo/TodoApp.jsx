@@ -1,65 +1,43 @@
 import React, {Component } from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import AuthenticatedRoute from './AuthenticatedRoute.jsx'
+import LoginComponent from './LoginComponent.jsx'
+import LogoutComponent from './LogoutComponent.jsx'
+import TodoComponent from './TodoComponent.jsx'
+import WelcomeComponent from './WelcomeComponent.jsx'
+import HeaderComponent from './HeaderComponent.jsx'
+import FooterComponent from './FooterComponent.jsx'
+import ErrorComponent from './ErrorComponent.jsx'
+import UpdateTodoComponent from './UpdateTodoComponent'
 
 class TodoApp extends Component{
     render(){
         return(
             <div className="TodoApp">
-                <LoginComponent></LoginComponent>
+                <Router>
+                    <>
+                        <HeaderComponent></HeaderComponent>
+                        <Switch>
+                            <Route path = "/" exact component= {LoginComponent}></Route>
+                            <Route path = "/login" component= {LoginComponent}></Route>
+                            <AuthenticatedRoute path = "/logout" component= {LogoutComponent}></AuthenticatedRoute>
+                            <AuthenticatedRoute path = "/welcome/:username" component= {WelcomeComponent}></AuthenticatedRoute>
+                            <AuthenticatedRoute path = "/todo/:id" component= {UpdateTodoComponent}></AuthenticatedRoute>
+                            <AuthenticatedRoute path = "/todo" component= {TodoComponent}></AuthenticatedRoute>
+                            <Route component= {ErrorComponent}></Route>
+                        </Switch>
+                        <FooterComponent></FooterComponent>
+                    </>
+                </Router>
+
+                {/* <LoginComponent></LoginComponent> */}
             </div>
         )
     }
 }
 
 //LoginComponent is a controller Component 
-class LoginComponent extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            userName: 'gracelyun',
-            passWord: '',
-            hasLoginFailed: false,
-            showSuccessfulMsg: false
-        }
-        this.changeContent = this.changeContent.bind(this)
-        this.loginCheck = this.loginCheck.bind(this)
 
-    }
-
-    changeContent(event){
-        // console.log(event.target.value)
-        this.setState({
-            [event.target.name]:
-                event.target.value
-        })
-    }
-
-    loginCheck(){
-        if(this.state.userName === 'gracelyun' && this.state.passWord ==='123'){
-            this.setState({hasLoginFailed: false})
-            this.setState({showSuccessfulMsg: true})
-        }
-        else{
-            this.setState({hasLoginFailed: true})
-            this.setState({showSuccessfulMsg: false})
-        }
-    }
-
-    render(){
-        return(
-            <div>
-                
-                {/* <ShowInvalidMsg hasLoginFailed= {this.state.hasLoginFailed}></ShowInvalidMsg>
-                <ShowSuccess showSuccessfulMsg= {this.state.showSuccessfulMsg}></ShowSuccess> */}
-
-                {this.state.hasLoginFailed && <div>Wrong userName or passWord</div>}
-                {this.state.showSuccessfulMsg && <div>Login successfully</div>}
-                UserName: <input type= "text" name= "userName" value= {this.state.userName} onChange= {this.changeContent}></input>
-                Password: <input type= "password" name= "passWord" value= {this.state.passWord} onChange= {this.changeContent} ></input>
-                <button onClick= {this.loginCheck}>Login</button>
-            </div>
-        )
-    }
-}
 
 // function ShowInvalidMsg(props){
 //     if(props.hasLoginFailed){
