@@ -24,16 +24,26 @@ class LoginComponent extends Component{
     }
 
     loginCheck(){
-        if(this.state.userName === 'gracelyun' && this.state.passWord ==='123'){
-            AuthenticationService.registerSuccessLogin(this.state.userName, this.state.passWord)
-            this.props.history.push(`/welcome/${this.state.userName}`)
-            // this.setState({hasLoginFailed: false})
-            // this.setState({showSuccessfulMsg: true})
-        }
-        else{
-            this.setState({hasLoginFailed: true})
-            this.setState({showSuccessfulMsg: false})
-        }
+        // AuthenticationService.executeBasicAuthencationService(this.state.userName, this.state.passWord)
+        //     .then(() =>{
+        //             AuthenticationService.registerSuccessLogin(this.state.userName, this.state.passWord)
+        //             this.props.history.push(`/welcome/${this.state.userName}`)
+        //         }
+        //     ).catch(() =>{
+        //             this.setState({hasLoginFailed: true})
+        //             this.setState({showSuccessfulMsg: false})
+        //         })
+
+
+        AuthenticationService.executeJwtAuthencationService(this.state.userName, this.state.passWord)
+        .then((response) =>{
+                AuthenticationService.registerSuccessLoginForJwt(this.state.userName, response.data.token)
+                this.props.history.push(`/welcome/${this.state.userName}`)
+            }
+        ).catch(() =>{
+                this.setState({hasLoginFailed: true})
+                this.setState({showSuccessfulMsg: false})
+            })
     }
 
     render(){
